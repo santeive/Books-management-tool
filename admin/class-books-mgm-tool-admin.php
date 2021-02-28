@@ -127,7 +127,17 @@ class Books_Mgm_Tool_Admin {
 	}
 
 	public function book_management_plugin() {
-		echo "<h3>Welcome to Plugin Menu </h3>";
+		global $wpdb;
+
+		//$user_email = $wpdb->get_var("SELECT user_email from wp_users WHERE ID = 1");
+		//echo $user_email;
+
+		$user_data = $wpdb->get_row("SELECT * from wp_users WHERE ID=1", ARRAY_A);
+		
+		echo "<pre>";
+
+		print_r($user_data);
+
 	}
 
 }
