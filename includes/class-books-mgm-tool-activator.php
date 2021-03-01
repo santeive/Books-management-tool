@@ -29,8 +29,36 @@ class Books_Mgm_Tool_Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {
+	public function activate() {
 
+		global $wpdb;
+		
+		if($wpdb->get_var("SHOW tables like '".$this->wp_owt_tbl_books()."'") !=  $this->wp_owt_tbl_books()) {
+			$table_query = "CREATE TABLE `".$this->wp_owt_tbl_books()."` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`name` varchar(150) DEFAULT NULL,
+				`amount` text DEFAULT NULL,
+				`description` int(11) DEFAULT NULL,
+				`book_image` varchar(200) DEFAULT NULL,
+				`language` varchar(150) DEFAULT NULL,
+				`status` int(11) NOT NULL DEFAULT 1,
+				`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"; 
+		   //table query
+
+			require_once (ABSPATH.'wp-admin/includes/upgrade.php');
+			dbDelta("$table_query");
+		}
+		//dynamic table generating code...
+	}
+
+	public function wp_owt_tbl_books() {
+		global $wpdb;
+		return $wpdb->prefix."wp_owt_tbl_books";
 	}
 
 }
+
+
+   

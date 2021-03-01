@@ -43,7 +43,8 @@ define( 'BOOKS_MGM_TOOL_VERSION', '1.0.0' );
  */
 function activate_books_mgm_tool() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-books-mgm-tool-activator.php';
-	Books_Mgm_Tool_Activator::activate();
+	$activator = new Books_Mgm_Tool_Activator();
+	$activator->activate();
 }
 
 /**

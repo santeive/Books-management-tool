@@ -131,21 +131,31 @@ class Books_Mgm_Tool_Admin {
 
 		//$user_email = $wpdb->get_var("SELECT user_email from wp_users WHERE ID = 1");
 		//echo $user_email;
-
+		#-----------------------------------------
 		/*$user_data = $wpdb->get_row("SELECT * from wp_users WHERE ID=1", ARRAY_A);
-		
 		echo "<pre>";
-
 		print_r($user_data);*/
-
+		#-----------------------------------------
 		/*$post_titles = $wpdb->get_col("SELECT post_title from wp_posts");
 		echo "<pre>";
-
 		print_r($post_titles);*/
-
-		$all_posts = $wpdb->get_results("SELECT ID, post_title from wp_posts", ARRAY_A);
+		#-----------------------------------------
+		/*$all_posts = $wpdb->get_results("SELECT ID, post_title from wp_posts", ARRAY_A);
 		echo "<pre>";
-		print_r($all_posts);
+		print_r($all_posts);*/
+		#-----------------------------------------
+		# prepare just to prevent sql injection when you need data from an input
+		/*$post_row = $wpdb->get_row(
+			$wpdb->prepare("SELECT * from wp_posts WHERE ID = %d", 1)
+		);
+		echo "<pre>";
+		print_r($post_row);*/
+		
+		#-----------------------------------------
+		##### Insert, Update, Delete Methods ans raw queries
+		
+		$wpdb->insert("");
+
 	}
 
 }
