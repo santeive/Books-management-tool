@@ -38,9 +38,20 @@ class Books_Mgm_Tool_Deactivator {
 	public function deactivate() {
 		global $wpdb;
 
-		// Dropping tbales on plugin uninstall
+		// Dropping tables on plugin uninstall
 		$wpdb->query("DROP TABLE if exists ".$this->table_activator->wp_owt_tbl_books());
 		$wpdb->query("DROP TABLE if exists ".$this->table_activator->wp_owt_tbl_book_shelf());
+		
+		// Delete pages when plugin uninstalls
+		$get_data =$wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT ID from ".$wpdb->prefix."posts WHERE post_name = %s", 'book_tool'
+			)
+		);
+		$page_id = $get_data->ID;
+		if($page_id > 0) {
+			wp_delete_post($page_id, true); //Delete post wp function
+		}
 	}
 
 }
