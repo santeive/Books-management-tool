@@ -41,6 +41,7 @@ class Books_Mgm_Tool_Activator {
 				`description` int(11) DEFAULT NULL,
 				`book_image` varchar(200) DEFAULT NULL,
 				`language` varchar(150) DEFAULT NULL,
+				`shelf_id` INT NULL,
 				`status` int(11) NOT NULL DEFAULT 1,
 				`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
 				PRIMARY KEY (`id`)
@@ -50,12 +51,33 @@ class Books_Mgm_Tool_Activator {
 			require_once (ABSPATH.'wp-admin/includes/upgrade.php');
 			dbDelta("$table_query");
 		}
-		//dynamic table generating code...
+		// table for create shelf
+		if($wpdb->get_var("SHOW tables like '".$this->wp_owt_tbl_book_shelf()."' ") != $this->wp_owt_tbl_book_shelf()) {
+			$shelf_table = "CREATE TABLE `".$this->wp_owt_tbl_book_shelf()."` (
+							`id` int(11) NOT NULL AUTO_INCREMENT,
+							`shelf_name` varchar(150) NOT NULL,
+							`capacity` int(11) NOT NULL,
+							`shelf_location` varchar(200) NOT NULL,
+							`status` int(11) NOT NULL DEFAULT 1,
+							`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+							PRIMARY KEY (`id`)
+						) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+			
+			require_once (ABSPATH.'wp-admin/includes/upgrade.php');
+			dbDelta("$shelf_table");
+		}
+
 	}
 
 	public function wp_owt_tbl_books() {
 		global $wpdb;
-		return $wpdb->prefix."wp_owt_tbl_books";
+		return $wpdb->prefix."owt_tbl_books";
+	}
+
+	// This table returns the table name
+	public function wp_owt_tbl_book_shelf(){
+		global $wpdb;
+		return $wpdb->prefix."owt_tbl_book_shelf";
 	}
 
 }
