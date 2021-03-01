@@ -29,8 +29,18 @@ class Books_Mgm_Tool_Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function deactivate() {
+	private $table_activator;
 
+	public function __construct($activator){
+		$this->table_activator = $activator;
+	}
+
+	public function deactivate() {
+		global $wpdb;
+
+		// Dropping tbales on plugin uninstall
+		$wpdb->query("DROP TABLE if exists ".$this->table_activator->wp_owt_tbl_books());
+		$wpdb->query("DROP TABLE if exists ".$this->table_activator->wp_owt_tbl_book_shelf());
 	}
 
 }

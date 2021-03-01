@@ -52,8 +52,13 @@ function activate_books_mgm_tool() {
  * This action is documented in includes/class-books-mgm-tool-deactivator.php
  */
 function deactivate_books_mgm_tool() {
+
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-books-mgm-tool-activator.php';
+	$activator = new Books_Mgm_Tool_Activator();
+
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-books-mgm-tool-deactivator.php';
-	Books_Mgm_Tool_Deactivator::deactivate();
+	$deactivator = new Books_Mgm_Tool_Deactivator($activator);
+	$deactivator->deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_books_mgm_tool' );
