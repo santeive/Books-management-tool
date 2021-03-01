@@ -49,7 +49,7 @@ class Books_Mgm_Tool_Activator {
 		   //table query
 
 			require_once (ABSPATH.'wp-admin/includes/upgrade.php');
-			dbDelta("$table_query");
+			dbDelta($table_query);
 		}
 		// table for create shelf
 		if($wpdb->get_var("SHOW tables like '".$this->wp_owt_tbl_book_shelf()."' ") != $this->wp_owt_tbl_book_shelf()) {
@@ -65,6 +65,14 @@ class Books_Mgm_Tool_Activator {
 			
 			require_once (ABSPATH.'wp-admin/includes/upgrade.php');
 			dbDelta("$shelf_table");
+
+			$insert_query = "INSERT into ".$this->wp_owt_tbl_book_shelf()." (
+				shelf_name, capacity, shelf_location, status) VALUES 
+				('Shelf 1', 230, 'Left Corner', 1), 
+				('Shelf 2', 300, 'Right Corner', 1),
+				('Shelf 3', 100, 'Center Top', 1)";
+
+			$wpdb->query($insert_query);
 		}
 
 	}
