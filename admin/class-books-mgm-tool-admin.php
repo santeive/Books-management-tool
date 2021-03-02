@@ -85,20 +85,29 @@ class Books_Mgm_Tool_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Books_Mgm_Tool_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Books_Mgm_Tool_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		$valid_pages = array("book-management-tool", "book-management-create-book", "book-management-list-book");
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/books-mgm-tool-admin.js', array( 'jquery' ), $this->version, false );
+		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 
+		if(in_array($page, $valid_pages)) {
+			wp_enqueue_script("jquery");
+
+			wp_enqueue_script( "owt-bootstrap-js", BOOKS_MGM_TOOL_PLUGIN_URL . 'assets/js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
+			
+			wp_enqueue_script( "owt-datatable-js", BOOKS_MGM_TOOL_PLUGIN_URL . 'assets/js/jquery.dataTables.min.js', array( 'jquery' ), $this->version, false );
+			
+			wp_enqueue_script( "owt-validate-js", BOOKS_MGM_TOOL_PLUGIN_URL . 'assets/js/jquery.validate.min.js', array( 'jquery' ), $this->version, false );
+			
+			wp_enqueue_script( "owt-sweetalert-js", BOOKS_MGM_TOOL_PLUGIN_URL . 'assets/js/sweetalert.min.js', array( 'jquery' ), $this->version, false );
+			
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/books-mgm-tool-admin.js', array( 'jquery' ), $this->version, false );
+
+			wp_localize_script($this->plugin_name, "owt_book", array(
+				"name" => "Santeive",
+				"author" => "Francisco Garcia",
+				"ajaxurl" => admin_url("admin-ajax.php")
+			));
+		}
 	}
 
 	//Create menu method
