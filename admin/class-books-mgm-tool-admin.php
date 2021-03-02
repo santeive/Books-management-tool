@@ -61,19 +61,20 @@ class Books_Mgm_Tool_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Books_Mgm_Tool_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Books_Mgm_Tool_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		$valid_pages = array("book-management-tool", "book-management-create-book", "book-management-list-book");
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/books-mgm-tool-admin.css', array(), $this->version, 'all' );
+		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
+
+		if(in_array($page, $valid_pages)) {
+			wp_enqueue_style( "owt-bootstrap", BOOKS_MGM_TOOL_PLUGIN_URL . 'assets/css/bootstrap.min.css', array(), $this->version, 'all' );
+			
+			wp_enqueue_style( "owt-datatable", BOOKS_MGM_TOOL_PLUGIN_URL . 'assets/css/jquery.dataTables.min.css', array(), $this->version, 'all' );
+			
+			wp_enqueue_style( "owt-sweetalert", BOOKS_MGM_TOOL_PLUGIN_URL . 'assets/css/sweetalert.css', array(), $this->version, 'all' );
+		}
+
+
+		//wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/books-mgm-tool-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -145,16 +146,16 @@ class Books_Mgm_Tool_Admin {
 		print_r($all_posts);*/
 		#-----------------------------------------
 		# prepare just to prevent sql injection when you need data from an input
-		/*$post_row = $wpdb->get_row(
+		$post_row = $wpdb->get_row(
 			$wpdb->prepare("SELECT * from wp_posts WHERE ID = %d", 1)
 		);
 		echo "<pre>";
-		print_r($post_row);*/
+		print_r($post_row);
 		
 		#-----------------------------------------
 		##### Insert, Update, Delete Methods ans raw queries
 		
-		$wpdb->insert("");
+		//$wpdb->insert("");
 
 	}
 
