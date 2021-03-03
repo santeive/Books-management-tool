@@ -125,11 +125,21 @@ class Books_Mgm_Tool_Admin {
 
 	// menu callback function 
 	public function book_management_dashboard() {
+
 		echo "<h3>Welcome to Plugin Dashboard</h3>";
 	}
 
 	public function book_management_create_book() {
-		echo "<h3>Welcome to Create Book Page</h3>";
+		ob_start(); //started buffer
+
+		//Included template file
+		include_once(BOOKS_MGM_TOOL_PLUGIN_PATH."admin/partials/tmpl-create-book.php");
+
+		$template = ob_get_contents(); //reading content
+
+		ob_end_clean(); //closing and cleaning buffer
+		
+		echo $template;
 	}
 
 	public function book_management_list_book() {
