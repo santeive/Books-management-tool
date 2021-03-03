@@ -118,6 +118,10 @@ class Books_Mgm_Tool_Admin {
 		add_submenu_page("book-management-tool", "Dashboard", "Dashboard", "manage_options", "book-management-tool", array($this, "book_management_plugin"));
 
 		add_submenu_page("book-management-tool", "Create Book", "Create Book", "manage_options", "book-management-create-book", array($this, "book_management_create_book"));
+		
+		add_submenu_page("book-management-tool", "Create Book Shelf", "Create Book Shelf", "manage_options", "book-management-create-book-self", array($this, "book_management_create_book_shelf"));
+		
+		add_submenu_page("book-management-tool", "List Book Shelf", "Create Book Shelf", "manage_options", "book-management-create-book-shelf", array($this, "book_management_create_book_shelf"));
 
 		add_submenu_page("book-management-tool", "List Book", "List Book", "manage_options", "book-management-list-book", array($this, "book_management_list_book"));
 	 
@@ -143,7 +147,16 @@ class Books_Mgm_Tool_Admin {
 	}
 
 	public function book_management_list_book() {
-		echo "<h3>Welcome to List Book Page</h3>";
+		ob_start(); //started buffer
+
+		//Included template file
+		include_once(BOOKS_MGM_TOOL_PLUGIN_PATH."admin/partials/tmpl-list-books.php");
+
+		$template = ob_get_contents(); //reading content
+
+		ob_end_clean(); //closing and cleaning buffer
+		
+		echo $template;
 	}
 
 	public function book_management_plugin() {
