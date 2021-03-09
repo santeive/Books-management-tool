@@ -61,7 +61,7 @@ class Books_Mgm_Tool_Admin {
 	 */
 	public function enqueue_styles() {
 
-		$valid_pages = array("book-management-tool", "book-management-create-book", "book-management-list-book");
+		$valid_pages = array("book-management-tool", "book-management-create-book", "book-management-list-book", "book-management-create-book-self", "book-management-list-book-shelf");
 
 		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 
@@ -85,7 +85,7 @@ class Books_Mgm_Tool_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		$valid_pages = array("book-management-tool", "book-management-create-book", "book-management-list-book");
+		$valid_pages = array("book-management-tool", "book-management-create-book", "book-management-list-book", "book-management-create-book-self", "book-management-list-book-shelf");
 
 		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 
@@ -121,7 +121,7 @@ class Books_Mgm_Tool_Admin {
 		
 		add_submenu_page("book-management-tool", "Create Book Shelf", "Create Book Shelf", "manage_options", "book-management-create-book-self", array($this, "book_management_create_book_shelf"));
 		
-		add_submenu_page("book-management-tool", "List Book Shelf", "Create Book Shelf", "manage_options", "book-management-create-book-shelf", array($this, "book_management_create_book_shelf"));
+		add_submenu_page("book-management-tool", "List Book Shelf", "List Book Shelf", "manage_options", "book-management-list-book-shelf", array($this, "book_management_list_book_shelf"));
 
 		add_submenu_page("book-management-tool", "List Book", "List Book", "manage_options", "book-management-list-book", array($this, "book_management_list_book"));
 	 
@@ -131,6 +131,35 @@ class Books_Mgm_Tool_Admin {
 	public function book_management_dashboard() {
 
 		echo "<h3>Welcome to Plugin Dashboard</h3>";
+	}
+
+	public function book_management_list_book_shelf(){
+		ob_start(); //started buffer
+
+		//Included template file
+		include_once(BOOKS_MGM_TOOL_PLUGIN_PATH."admin/partials/tmpl-list-books-shelf.php");
+
+		$template = ob_get_contents(); //reading content
+
+		ob_end_clean(); //closing and cleaning buffer
+		
+		echo $template;
+	}
+
+	// create book shelf layout
+	public function book_management_create_book_shelf(){
+
+		ob_start(); //started buffer
+
+		//Included template file
+		include_once(BOOKS_MGM_TOOL_PLUGIN_PATH."admin/partials/tmpl-create-book-shelf.php");
+
+		$template = ob_get_contents(); //reading content
+
+		ob_end_clean(); //closing and cleaning buffer
+		
+		echo $template;
+		 
 	}
 
 	public function book_management_create_book() {
