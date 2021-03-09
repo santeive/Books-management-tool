@@ -220,4 +220,25 @@ class Books_Mgm_Tool_Admin {
 
 	}
 
+	public function handle_ajax_requests_admin(){
+		// handles all ajax request of admin
+		$param = isset($_REQUEST['param']) ? $_REQUEST['param'] : "";
+		
+		if(!empty($param)) {
+			if($param == "first_simple_ajax"){
+				echo json_encode(array(
+					"status" => 1,
+					"message" => "First Ajax Request",
+					"data" => array(
+						"name" => "Online Web Tutorial",
+						"author" => "Santeive"
+					)
+				));
+			}
+		}
+
+		wp_die();
+		
+	}
+
 }

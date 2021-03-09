@@ -160,6 +160,8 @@ class Books_Mgm_Tool {
 		// add_action(action_hook, object, function)
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'book_management_menu' );
 
+		// action hook for ajax
+		$this->loader->add_action("wp_ajax_admin_ajax_request", $plugin_admin, 'handle_ajax_requests_admin' );
 	}
 
 	/**
