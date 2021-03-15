@@ -40,6 +40,8 @@ class Books_Mgm_Tool_Admin {
 	 */
 	private $version;
 
+	private $table_activator;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,6 +53,10 @@ class Books_Mgm_Tool_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		require_once BOOKS_MGM_TOOL_PLUGIN_PATH . 'includes/class-books-mgm-tool-activator.php';
+		$activator = new Books_Mgm_Tool_Activator();
+		$this->table_activator = $activator;
 
 	}
 
@@ -221,6 +227,9 @@ class Books_Mgm_Tool_Admin {
 	}
 
 	public function handle_ajax_requests_admin(){
+
+		global $wpdb;
+
 		// handles all ajax request of admin
 		$param = isset($_REQUEST['param']) ? $_REQUEST['param'] : "";
 		
@@ -234,6 +243,33 @@ class Books_Mgm_Tool_Admin {
 						"author" => "Santeive"
 					)
 				));
+			} elseif($param == "create_book_shelf"){
+				
+				// gett all data from form
+				$name = isset($_REQUEST['txt_name']) ? $_REQUEST['txt_name'] : "";
+				$capacity = isset($_REQUEST['txt_capacity']) ? $_REQUEST['txt_capacity'] : "";
+				$location = isset($_REQUEST['txt_location']) ? $_REQUEST['txt_location'] : "";
+				$status = isset($_REQUEST['dd_status']) ? $_REQUEST['dd_status'] : "";
+				//print_r($_REQUEST);
+
+				$wpdb->insert($this->table_activator->wp_owt_tbl_book_shelf(), array(
+					"shelf_name" => $name,
+					"capacity" => $capacity,
+					"shelf_location" => $location,
+					"status" => $status
+				));
+
+				if($wpdb->insert_id > 0) {
+					echo json_encode(array(
+						"status" => 1,
+						"message" => "Book SHelf created successfully"
+					));
+				}else {
+					echo json_encode(array(
+						"status" => 0,
+						"message" => "Failed to create book shelf"
+					));
+				}
 			}
 		}
 
