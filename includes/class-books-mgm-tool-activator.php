@@ -37,10 +37,10 @@ class Books_Mgm_Tool_Activator {
 			$table_query = "CREATE TABLE `".$this->wp_owt_tbl_books()."` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
 				`name` varchar(150) DEFAULT NULL,
-				`amount` text DEFAULT NULL,
-				`description` int(11) DEFAULT NULL,
+				`amount` int(11) DEFAULT NULL,
+				`description` text DEFAULT NULL,
 				`book_image` varchar(200) DEFAULT NULL,
-				`language` varchar(150) DEFAULT NULL,
+				`email` varchar(150) DEFAULT NULL,
 				`shelf_id` INT NULL,
 				`status` int(11) NOT NULL DEFAULT 1,
 				`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
