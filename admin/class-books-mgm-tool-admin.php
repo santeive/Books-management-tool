@@ -182,6 +182,16 @@ class Books_Mgm_Tool_Admin {
 	}
 
 	public function book_management_create_book() {
+
+		global $wpdb;
+
+		$book_shelf = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT id, shelf_name FROM ".$this->table_activator->
+					wp_owt_tbl_book_shelf(), ""
+			)
+		);
+
 		ob_start(); //started buffer
 
 		//Included template file

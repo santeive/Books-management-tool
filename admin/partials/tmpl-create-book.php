@@ -5,6 +5,23 @@
             <div class="panel-body">
                 <form class="form-horizontal" action="/action_page.php">
                     <div class="form-group">
+                            <label class="control-label col-sm-2" for="dd_book_shelf">Select Book Shelf:</label>
+                            <div class="col-sm-10">
+                            <select name="dd_book_shelf" required="" class="form-control">
+                                <option value="1">Choose Shelf</option>
+                                <?php 
+                                    if(count($book_shelf) > 0) {
+                                        foreach($book_shelf as $key => $value) {
+                                            ?>
+                                                <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->shelf_name); ?></option>
+                                            <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
+                            </div>
+                        </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-2" for="txt_name">Name:</label>
                         <div class="col-sm-10">
                         <input type="text" class="form-control" name="txt_name" id="txt_name" placeholder="Enter name">
