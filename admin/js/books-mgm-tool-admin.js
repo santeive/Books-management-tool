@@ -10,6 +10,33 @@ jQuery(function(){
 		jQuery('#tbl-list-book-shelf').DataTable();
 	}
 
+	// delete book shelf row from datatable
+	jQuery(document).on("click", ".btn-delete-book-shelf", function(){
+		// read data-id
+		var shelf_id = jQuery(this).attr("data-id");
+
+		var conf = confirm("Are you sure you want to delete?");
+
+		if(conf) { //ok button of confirmation box
+			var postdata = "action=admin_ajax_request&param=delete_book_shelf&shelf_id=" + shelf_id;
+			jQuery.post(ajaxurl, postdata, function(response){
+				var data = jQuery.parseJSON(response);
+
+				if(data.status == 1) {
+					alert(data.message);
+
+					setTimeout(function(){
+						location.reload();
+					}, 1000);
+				}else {
+					alert(data.message);
+				}
+			});
+		}
+
+	});
+
+
 	// create book shelf code
 	jQuery("#frm-add-book-shelf").validate({
 		submitHandler: function() {

@@ -33,13 +33,13 @@
                                                 <?php
                                             }else {
                                                 ?>
-                                                <button class="btn btn-success">Inactive</button>
+                                                <button class="btn btn-danger">Inactive</button>
                                                 <?php
                                             }
                                         ?>
                                     </td>
                                     <td>
-                                            <button class="btn btn-danger">Delete</button>
+                                            <button class="btn btn-danger btn-delete-book-shelf" data-id="<?php echo $data->id ?>">Delete</button>
                                     </td>
                                 </tr>
                                 <?php

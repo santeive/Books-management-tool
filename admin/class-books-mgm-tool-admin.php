@@ -283,6 +283,26 @@ class Books_Mgm_Tool_Admin {
 						"message" => "Failed to create book shelf"
 					));
 				}
+			}elseif($param == "delete_book_shelf") {
+				$shelf_id = isset($_REQUEST['shelf_id']) ? intval($_REQUEST['shelf_id']) : 0;
+
+				if($shelf_id > 0) {
+
+					$wpdb->delete($this->table_activator->wp_owt_tbl_book_shelf(), array(
+						"id" => $shelf_id
+					));
+
+					echo json_encode(array(
+						"status" => 1,
+						"message" => "Book shelf deleted successfully"
+					));
+
+				}else{
+					echo json_encode(array(
+						"status" => 0,
+						"message" => "Book shelf is not valid"
+					));
+				}
 			}
 		}
 
