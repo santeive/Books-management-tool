@@ -40,6 +40,7 @@ class Books_Mgm_Tool_Activator {
 				`amount` int(11) DEFAULT NULL,
 				`description` text DEFAULT NULL,
 				`book_image` varchar(200) DEFAULT NULL,
+				`publication` varchar(150) DEFAULT NULL,
 				`email` varchar(150) DEFAULT NULL,
 				`shelf_id` INT NULL,
 				`status` int(11) NOT NULL DEFAULT 1,

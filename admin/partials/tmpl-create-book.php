@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="txt_publication">Publication:</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="txt_publication" placeholder="Enter publication">
+                        <input type="text" class="form-control" name="txt_publication" id="txt_publication" placeholder="Enter publication">
                         </div>
                     </div>
                     <div class="form-group">

@@ -205,6 +205,17 @@ class Books_Mgm_Tool_Admin {
 	}
 
 	public function book_management_list_book() {
+
+		global $wpdb;
+		$books_data = $wpdb->get_results($wpdb->prepare(
+			"SELECT * from ".$this->table_activator->wp_owt_tbl_books().
+				" ORDER BY id DESC", ""
+			)
+		);
+
+		//echo "<pre>";
+		//print_r($books_data);
+
 		ob_start(); //started buffer
 
 		//Included template file
@@ -330,6 +341,7 @@ class Books_Mgm_Tool_Admin {
 					"name" => strtolower($txt_name),
 					"amount" => $txt_cost,
 					"description" => $txt_description,
+					"publication" => $txt_publication,
 					"email" => $txt_email,
 					"shelf_id" => $shelf_id,
 					"book_image" => $book_cover_image,
