@@ -319,6 +319,7 @@ class Books_Mgm_Tool_Admin {
 
 				$shelf_id = isset($_REQUEST['dd_book_shelf']) ? intval($_REQUEST['dd_book_shelf']) : 0;
 				$txt_name = isset($_REQUEST['txt_name']) ? $_REQUEST['txt_name'] : "";
+				$book_cover_image = isset($_REQUEST['book_cover_image']) ? $_REQUEST['book_cover_image'] : "";
 				$txt_email = isset($_REQUEST['txt_email']) ? $_REQUEST['txt_email'] : "";
 				$txt_publication = isset($_REQUEST['txt_publication']) ? $_REQUEST['txt_publication'] : "";
 				$txt_description = isset($_REQUEST['txt_description']) ? $_REQUEST['txt_description'] : "";
@@ -331,6 +332,7 @@ class Books_Mgm_Tool_Admin {
 					"description" => $txt_description,
 					"email" => $txt_email,
 					"shelf_id" => $shelf_id,
+					"book_image" => $book_cover_image,
 					"status" => $dd_status,
 				));
 

@@ -10,6 +10,19 @@ jQuery(function(){
 		jQuery('#tbl-list-book-shelf').DataTable();
 	}
 
+	jQuery(document).on("click", "#txt_image", function(){
+		var image = wp.media({
+			title: "Upload Book image",
+			multiple: false
+		}).open().on("select", function(e){
+			var uploaded_image = image.state().get("selection").first();
+			//console.log(uploaded_image.toJSON());
+			var image_data = uploaded_image.toJSON()
+			jQuery("#book_image").attr("src", image_data.url);
+			jQuery("#book_cover_image").val(image_data.url);
+		});
+	});
+
 	jQuery("#frm-create-book").validate({
 		submitHandler: function() {
 			var postdata = jQuery("#frm-create-book").serialize();
