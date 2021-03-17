@@ -359,6 +359,19 @@ class Books_Mgm_Tool_Admin {
 						"message" => "Failed to create book"
 					));
 				}
+			}elseif($param == "delete_book") {
+				$book_id = isset($_REQUEST['book_id']) ? intval($_REQUEST['book_id']) : 0;
+
+				if($book_id > 0) {
+					$wpdb->delete($this->table_activator->wp_owt_tbl_books(), array(
+						"id" => $book_id
+					));
+
+					echo json_encode(array(
+						"status" => 1,
+						"message" => "Book Deleted successfully",
+					));
+				}
 			}
 		}
 
