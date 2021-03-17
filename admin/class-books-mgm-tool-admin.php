@@ -208,8 +208,8 @@ class Books_Mgm_Tool_Admin {
 
 		global $wpdb;
 		$books_data = $wpdb->get_results($wpdb->prepare(
-			"SELECT * from ".$this->table_activator->wp_owt_tbl_books().
-				" ORDER BY id DESC", ""
+			"SELECT book.*, book_shelf.shelf_name from ".$this->table_activator->wp_owt_tbl_books().
+				" as book LEFT JOIN ".$this->table_activator->wp_owt_tbl_book_shelf()." as book_shelf ON book.shelf_id = book_shelf.id ORDER BY id DESC", ""
 			)
 		);
 
