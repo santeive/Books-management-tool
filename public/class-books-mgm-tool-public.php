@@ -100,4 +100,12 @@ class Books_Mgm_Tool_Public {
 
 	}
 
+	public function our_own_custom_page_template() {
+		global $post;
+		if($post->post_name == "book_tool"){
+			$page_template = BOOKS_MANAGEMENT_TOOL_PLUGIN_PATH."public/partials/book-tool-layout.php";
+		}
+		return $page_template;
+	}
+
 }
