@@ -183,7 +183,11 @@ class Books_Mgm_Tool {
 
 		add_shortcode("render-my-content", array($plugin_public, "load_book_tool_content"));
 
+		//This is for login case
 		$this->loader->add_action("wp_ajax_public_ajax_request", $plugin_public, "handle_ajax_request_public");
+		
+		//This is for not login case
+		$this->loader->add_action("wp_ajax_nopriv_public_ajax_request", $plugin_public, "handle_ajax_request_public");
 	}
 
 	/**
