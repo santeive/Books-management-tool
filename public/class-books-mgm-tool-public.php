@@ -98,6 +98,12 @@ class Books_Mgm_Tool_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/books-mgm-tool-public.js', array( 'jquery' ), $this->version, false );
 
+		wp_localize_script($this->plugin_name, "owt_book", array(
+			"name" => "Santeive",
+			"author" => "Francisco Garcia",
+			"ajaxurl" => admin_url("admin-ajax.php")
+		));
+
 	}
 
 	public function our_own_custom_page_template() {
@@ -118,6 +124,19 @@ class Books_Mgm_Tool_Public {
 		ob_end_clean();
 
 		echo $template;
+	}
+
+	public function handle_ajax_request_public() {
+		$param = isset($_REQUEST['param']) ? $_REQUEST['param'] : "";
+		if(!empty($param)) {
+			if($param == "first_ajax_request") {
+				echo json_encode(array(
+					"status" => 1,
+					"message" => "Successfully completed first ajax from frontend"
+				));
+			}
+		}
+		wp_die();
 	}
 
 }

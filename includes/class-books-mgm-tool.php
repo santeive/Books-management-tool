@@ -182,6 +182,8 @@ class Books_Mgm_Tool {
 		$this->loader->add_filter("page_template", $plugin_public, "our_own_custom_page_template");
 
 		add_shortcode("render-my-content", array($plugin_public, "load_book_tool_content"));
+
+		$this->loader->add_action("wp_ajax_public_ajax_request", $plugin_public, "handle_ajax_request_public");
 	}
 
 	/**
