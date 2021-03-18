@@ -1,9 +1,9 @@
 <?php
     get_header(); //to include wordpress header
-?>
 
-<h3>Simple message for this page</h3>
+    // Adding shortcode to the page
+    // used to render content of shortcode
+    do_shortcode("[render-my-content]");
 
-<?php
     get_footer();
 ?>

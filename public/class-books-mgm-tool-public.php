@@ -108,4 +108,16 @@ class Books_Mgm_Tool_Public {
 		return $page_template;
 	}
 
+	public function load_book_tool_content() {
+		ob_start();
+
+		include_once BOOKS_MGM_TOOL_PLUGIN_PATH.'public/partials/tmpl-book-tool-content.php';
+		
+		$template = ob_get_contents();
+		
+		ob_end_clean();
+
+		echo $template;
+	}
+
 }
